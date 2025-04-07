@@ -23,7 +23,7 @@ public class Layer : MonoBehaviour
         left.transform.SetParent(transform);
         right.transform.SetParent(transform);
 
-        float numPixels = UnitSize();
+        //float numPixels = UnitSize();
 
         /*float width = left.transform.localScale.x;
         Vector2 adjustedOne = cam.WorldToScreenPoint(Vector2.zero);
@@ -38,7 +38,7 @@ public class Layer : MonoBehaviour
 
         Vector2 shapeDiam = new Vector2(sumX, sumY);*/
 
-        int unitWidth = left.GetComponent<Chunk>().width;
+        /*int unitWidth = left.GetComponent<Chunk>().width;
         float centerPivot = numPixels / 2;
         float actualWidth = numPixels * unitWidth - centerPivot;
 
@@ -51,7 +51,9 @@ public class Layer : MonoBehaviour
         widthBorders.x = cam.ScreenToWorldPoint(new Vector2(0, 0), 0).x;
         widthBorders.y = cam.ScreenToWorldPoint(new Vector2(cam.pixelRect.width, 0), 0).x;
         heightBorders.x = cam.ScreenToWorldPoint(new Vector2(0, 0), 0).y;
-        heightBorders.y = cam.ScreenToWorldPoint(new Vector2(0, cam.pixelRect.height), 0).y;
+        heightBorders.y = cam.ScreenToWorldPoint(new Vector2(0, cam.pixelRect.height), 0).y;*/
+
+        SetTunnelWalls();
 
     }
 
@@ -70,5 +72,28 @@ public class Layer : MonoBehaviour
         Vector2 start = cam.WorldToScreenPoint(Vector2.zero);
         Vector2 end = cam.WorldToScreenPoint(new Vector2(mod * blockScale, 0));
         return end.x - start.x;
+    }
+
+    private void SetTunnelWalls()
+    {
+        //Find edges of screen
+        //Find width of each chunk
+        //Set position of each chunk flush with the screen
+
+        float screenRight =  Screen.width;
+        //float screenTop =  Screen.height;
+
+        Vector2 worldLeftPos = cam.ScreenToWorldPoint(new Vector2(0, 0));
+        Vector2 worldRightPos = cam.ScreenToWorldPoint(new Vector2(screenRight, 0));
+
+        Chunk chunk = left.GetComponent<Chunk>();
+        float chunkWidth = chunk.GetWidth();
+        float blockWidth = chunk.blockSize;
+        //float chunkHeight = chunk.GetWidth();
+
+        left.transform.localPosition = new Vector2(worldLeftPos.x + (blockWidth / 2), 0);
+        right.transform.localPosition = new Vector2(worldRightPos.x - (chunkWidth * 2) + (blockWidth / 2), 0);
+        print("The chunks should place at positions: " + left.transform.localPosition + " " + right.transform.localPosition);
+        print("Chunk width should be " + chunkWidth);
     }
 }

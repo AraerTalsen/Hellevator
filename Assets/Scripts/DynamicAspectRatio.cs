@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//The DynamicAspectRatio adjusts the sizes of the scens based on screen size and aspect ratio
+//The DynamicAspectRatio adjusts the sizes of the scenes based on screen size and aspect ratio
 public class DynamicAspectRatio : MonoBehaviour
 {
     public GameObject game, left, right, bottom, top;
@@ -20,7 +20,7 @@ public class DynamicAspectRatio : MonoBehaviour
     //Finds screen size and sets a modifier based on the size compared to a publicly set default ratio
     void Awake()
     {
-        Vector2 currentRatio = new Vector2(cam.pixelWidth, cam.pixelHeight);
+        /*Vector2 currentRatio = new Vector2(cam.pixelWidth, cam.pixelHeight);
         float modifierY = currentRatio.y / (defaultRatio.y * oneForOne);
         float modifierX = currentRatio.x / (defaultRatio.x * oneForOne);
         modifier = modifierX < modifierY ? modifierX : modifierY;
@@ -36,7 +36,7 @@ public class DynamicAspectRatio : MonoBehaviour
         worldX0 = cam.ScreenToWorldPoint(Vector2.zero).x;
         worldY0 = cam.ScreenToWorldPoint(Vector2.zero).y;
 
-        ScaleBorder();
+        ScaleBorder();*/
     }
 
     private void ScaleBorder()
@@ -79,6 +79,6 @@ public class DynamicAspectRatio : MonoBehaviour
 
     public float GetModifier()
     {
-        return modifier;
+        return 1;//modifier;
     }
 }
