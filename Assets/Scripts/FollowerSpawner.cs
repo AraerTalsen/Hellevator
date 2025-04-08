@@ -43,13 +43,15 @@ public class FollowerSpawner : MonoBehaviour
 
     private void FadeInIndicator(Vector2 spawnPos)
     {
-        int side = spawnPos.x > 0 ? -1 : 1;
+        //int side = spawnPos.x > 0 ? -1 : 1;
         Vector2 flip = spawnPos.x > 0 ? new Vector2(1, 1) : new Vector2(-1, 1);
         indicator.transform.localScale = flip;
 
-        float buffer = side * (DynamicAspectRatio.worldWidth * .05f );
-        spawnPos.x = -side * DynamicAspectRatio.worldWidth * .5f + buffer;
-        glass.rectTransform.position = spawnPos;
+        //indicator.transform.localPosition = spawnPos.x < 0 ? worldLeftPos : worldRightPos;
+        //float buffer = side * (DynamicAspectRatio.worldWidth * .05f );
+        //spawnPos.x = -side * DynamicAspectRatio.worldWidth * .5f + buffer;
+        float glassScale = glass.rectTransform.localScale.x;
+        glass.rectTransform.position = spawnPos.x < 0 ? new Vector2(spawnPos.x + 2 + glassScale, spawnPos.y) : new Vector2(spawnPos.x - 2 - glassScale, spawnPos.y);
         anim.SetTrigger("in");
     }
 
@@ -59,7 +61,7 @@ public class FollowerSpawner : MonoBehaviour
         Vector2 heightRange = Layer.heightBorders;
 
         float xPos = Random.Range(0, 2) == 0 ? widthRange.x - 2 : widthRange.y + 2;
-        float yPos = Random.Range(heightRange.x, heightRange.y + 1);
+        float yPos = Random.Range(heightRange.x + 1, heightRange.y);
 
         return new Vector2(xPos, yPos);
     }

@@ -45,7 +45,7 @@ public class Tunnel : MonoBehaviour
 
             if(layers[i].transform.localPosition.y >= threshold)
             {
-                Destroy(layers[i]);
+                Destroy(layers[i]);//Enemies within the layer aren't tracked as being destroyed and still count towards the spawn cap
                 layers[i] = Instantiate(layer);
                 layers[i].transform.SetParent(transform);
                 layers[i].transform.localPosition = new Vector2(0, generate);

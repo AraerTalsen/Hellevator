@@ -51,7 +51,6 @@ public class Aim : MonoBehaviour
             transform.position = mousePos;
         }*/
         transform.position = mousePos;
-        if(Input.GetMouseButtonUp(0)) print(transform.position);
 
         if (Input.GetKey(KeyCode.Mouse0)/* && !EnergyGuage.empty*/)
         {

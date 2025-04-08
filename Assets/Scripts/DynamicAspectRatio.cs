@@ -10,6 +10,7 @@ public class DynamicAspectRatio : MonoBehaviour
 {
     public GameObject game, left, right, bottom, top;
     public Vector2 defaultRatio;
+    public static Vector2 worldLeftPos, worldRightPos;
     public float oneForOne;
     public Camera cam;
     public static float modifier, borderX, borderY, worldWidth, worldBorderX, worldX0, worldY0;
@@ -20,6 +21,8 @@ public class DynamicAspectRatio : MonoBehaviour
     //Finds screen size and sets a modifier based on the size compared to a publicly set default ratio
     void Awake()
     {
+        //float chunkHeight = chunk.GetWidth();
+        
         /*Vector2 currentRatio = new Vector2(cam.pixelWidth, cam.pixelHeight);
         float modifierY = currentRatio.y / (defaultRatio.y * oneForOne);
         float modifierX = currentRatio.x / (defaultRatio.x * oneForOne);
@@ -37,6 +40,15 @@ public class DynamicAspectRatio : MonoBehaviour
         worldY0 = cam.ScreenToWorldPoint(Vector2.zero).y;
 
         ScaleBorder();*/
+    }
+
+    void Start()
+    {
+        float screenRight =  Screen.width;
+        //float screenTop =  Screen.height;
+
+        Vector2 worldLeftPos = cam.ScreenToWorldPoint(new Vector2(0, 0));
+        Vector2 worldRightPos = cam.ScreenToWorldPoint(new Vector2(screenRight, 0));
     }
 
     private void ScaleBorder()

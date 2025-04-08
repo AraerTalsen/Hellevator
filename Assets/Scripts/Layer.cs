@@ -81,10 +81,15 @@ public class Layer : MonoBehaviour
         //Set position of each chunk flush with the screen
 
         float screenRight =  Screen.width;
-        //float screenTop =  Screen.height;
+        float screenTop =  Screen.height;
 
         Vector2 worldLeftPos = cam.ScreenToWorldPoint(new Vector2(0, 0));
         Vector2 worldRightPos = cam.ScreenToWorldPoint(new Vector2(screenRight, 0));
+
+        Vector2 worldTopPos = cam.ScreenToWorldPoint(new Vector2(0, screenTop));
+
+        widthBorders = new Vector2(worldLeftPos.x, worldRightPos.x);
+        heightBorders = new Vector2(worldLeftPos.y, worldTopPos.y);
 
         Chunk chunk = left.GetComponent<Chunk>();
         float chunkWidth = chunk.GetWidth();
@@ -93,7 +98,5 @@ public class Layer : MonoBehaviour
 
         left.transform.localPosition = new Vector2(worldLeftPos.x + (blockWidth / 2), 0);
         right.transform.localPosition = new Vector2(worldRightPos.x - (chunkWidth * 2) + (blockWidth / 2), 0);
-        print("The chunks should place at positions: " + left.transform.localPosition + " " + right.transform.localPosition);
-        print("Chunk width should be " + chunkWidth);
     }
 }
